@@ -1,4 +1,4 @@
-# docker
+# Docker
 
 This repository contains learning material and hands-on exercises for Docker and Docker Compose.
 It covers:
