@@ -1,0 +1,41 @@
+version: "3.9"  # Docker Compose file version; 3.9 supports modern features 
+
+services:
+  # MongoDB Database Service
+ 
+  mongo-db:
+    image: mongo:6.0.5-jammy       # Use official MongoDB image based on Ubuntu Jammy
+    container_name: mongo-db         # Assign a fixed container name for easier management
+    restart: always                # Always restart container on failure or host reboot
+    ports:
+      - "27017:27017"             # Map container's MongoDB port to host for local access
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root   # Root username for initial MongoDB setup
+      MONGO_INITDB_ROOT_PASSWORD: root   # Root password for initial MongoDB setup
+    volumes:
+      - mongo_data:/data/db       # Persist MongoDB data in a named Docker volume
+
+  # -----------------------------
+  # Spring Boot Application Service
+  # -----------------------------
+  emp-app:
+    image: emp:latest             # Use the Spring Boot app image built from Dockerfile
+    container_name: emp-app       # Assign a fixed container name for easier management
+    restart: always               # Always restart container on failure or host reboot
+    depends_on:
+      - mongo-db                    # Ensure MongoDB starts before this service
+    ports:
+      - "8080:8080"               # Map app's internal port to host for access
+    environment:                   # Environment variables for MongoDB connection
+      MONGO_SERVER: mongo-db        # MongoDB hostname (Docker service name)
+      MONGO_DB: emp               # Database name to connect ( It tells your Spring Boot application which MongoDB database to use when connecting. )
+      MONGO_PORT: 27017           # MongoDB port
+      MONGO_USERNAME: root        # MongoDB username
+      MONGO_PASSWORD: root        # MongoDB password
+
+# -----------------------------
+# Volumes for Persistent Data
+# -----------------------------
+volumes:
+  mongo_data: {}                  # Named volume for MongoDB data persistence
+
