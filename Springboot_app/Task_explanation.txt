@@ -1,0 +1,15 @@
+Docker & Docker Compose: Build and Manage a Java Spring Boot + MongoDB application
+
+#TASK & Requirement
+
+-->This is a web application built on the Spring Boot framework and uses MongoDB as a database. 
+In this sprint, the team wishes to use Docker to build an image that includes the web application and 
+to use Docker Compose to orchestrate the deployment of the web application alongside its required components, 
+such as the MongoDB database, ensuring seamless integration and efficient management of the entire application stack
+
+-->eed to deploy the application with Docker Compose and ensure it successfully connects to the database. 
+Once this is working, expose the application to the outside for testing purposes. 
+Do a manual acceptance test and ensure the application is working as expected and that any data is persistently stored. 
+Please use known Docker best practices. 
+Make sure to create the Dockerfile and docker-compose.yml manifest files needed to build and deploy the application,
+as they will be added to the Version Control System (Git) by the team.
